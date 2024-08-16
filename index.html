@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subliminal Affirmations & Radionics</title>
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            align-items: centet;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .affirmation-input {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 1em;
+            color: red;
+        }
+
+        .add-affirmation {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            color: red;
+        }
+
+        .add-affirmation:hover {
+            background-color: #555;
+        }
+
+        .affirmation-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2em;
+            opacity: 0.05;
+            animation: subliminal 20s infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes subliminal {
+            0%, 95% { opacity: 0.05; }
+            100% { opacity: 0.5; }
+        }
+
+        .radionics-section {
+            margin-top: 30px;
+        }
+
+        .intent-input {
+            width: 60%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 1em;
+            color: yellow;
+        }
+
+        .activate-radionics {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        .activate-radionics:hover {
+            background-color: #555;
+        }
+    
+    
+    
+    .knobs-container{
+        touch-action: none; /* Prevent default touch actions like scrolling */
+    text-align: center;
+        border: 1px solid red;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Affirmations As Subliminals & Radionics</h1>
+        
+        <!-- Affirmations Input -->
+        <input type="text" class="affirmation-input" id="affirmationInput" placeholder="Enter your affirmation...">
+        <button class="add-affirmation" onclick="addAffirmation()">Add Affirmation</button>
+
+        <!-- Affirmation Display -->
+        <div class="affirmation-display" id="affirmationDisplay">Your affirmations will appear here.</div>
+
+        <!-- Radionics Section -->
+        <div class="radionics-section">
+          
+            <style>
+            .knobs-container {
+    display: flex;
+    gap: 10px; /* Adjust spacing between knobs if needed */
+}
+
+.knob {
+    width: 100px;
+    height: 100px;
+    background-image: url('https://raw.githubusercontent.com/MysticWaveTech/SubliminalAffirmatiinsRadionics/main/audio-35447_1280%20(1).png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+    cursor: pointer; /* Indicate that it's draggable */
+    transform-origin: center center; /* Ensure rotation happens around the center */
+    transition: transform 0.1s; /* Smooth transformation */
+}
+            
+            .intent-input{float: left;}
+            </style>
+            
+              <div class="knobs-container">
+                    <input type="text" class="intent-input" id="intentInput" placeholder="Enter your intention...">
+             <div class="abilities-container">
+      
+    </div>
+                  
+        <div class="knob" id="knob1"></div>
+        <div class="knob" id="knob2"></div>
+        <div class="knob" id="knob3"></div>
+                  
+                  
+                  
+    </div>
+        </div>
+    </div>
+
+    <script>
+        // Array to store affirmations
+        let affirmations = [];
+
+        // Function to add an affirmation
+        function addAffirmation() {
+            const affirmationInput = document.getElementById('affirmationInput').value;
+            if (affirmationInput.trim() !== '') {
+                affirmations.push(affirmationInput);
+                document.getElementById('affirmationInput').value = '';
+                displayAffirmation();
+            }
+        }
+
+        // Function to display the affirmation subliminally
+        function displayAffirmation() {
+            const affirmationDisplay = document.getElementById('affirmationDisplay');
+            affirmationDisplay.innerText = affirmations.join(' • ');
+        }
+
+     document.querySelectorAll('.knob').forEach(knob => {
+    let isDragging = false;
+    let initialAngle = 0;
+    let currentRotation = 0;
+
+    function startDrag(e) {
+        isDragging = true;
+        e.preventDefault(); // Prevent default touch actions
+        const touch = e.touches ? e.touches[0] : e; // Handle touch or mouse event
+        const rect = knob.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        initialAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+    }
+
+    function drag(e) {
+        if (!isDragging) return;
+        const touch = e.touches ? e.touches[0] : e; // Handle touch or mouse event
+        const rect = knob.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const currentAngle = Math.atan2(touch.clientY - centerY, touch.clientX - centerX);
+        const deltaAngle = currentAngle - initialAngle;
+        currentRotation += deltaAngle * (180 / Math.PI);
+        knob.style.transform = `rotate(${currentRotation}deg)`;
+        initialAngle = currentAngle; // Update initialAngle for continuous rotation
+    }
+
+    function endDrag() {
+        isDragging = false;
+    }
+
+    // Add event listeners for mouse
+    knob.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', drag);
+    document.addEventListener('mouseup', endDrag);
+
+    // Add event listeners for touch
+    knob.addEventListener('touchstart', startDrag);
+    document.addEventListener('touchmove', drag);
+    document.addEventListener('touchend', endDrag);
+});
+    </script>
+</body>
+</html>
